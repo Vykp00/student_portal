@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+<!-- Style with Bootstrap here-->
+<!-- Browse course banner-->
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <h2 class="header deep-purple-text center">Knowledge Workshop</h2>
+        <h5 class="header col s12 light center">Earn your certificate, learn a new skill everydays</h5>
+    </div>
+    <div class="row center">
+        <a class="btn-large blue" href="{% url 'category' %}">Browse</a>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Course List-->
+{% block content %}
+<div class="section">
+    <h3><b>My Courses</b></h3>
+    <div class="divider">
+
+    </div>
+</div>
+
+
+<div class="row">
+    {% for course in courses %}
+    <div class="col s12 m4">
+        <div class="card medium">
+            <div class="card-image waves-effect waves-block waves-light">
+                <a href="{% url 'course' course.id %}"><img class="activator" src="{{ course.image.url }}"></a>
+            </div>
+            <div class="card-content">
+                <span class="card-title activator blue-text text-darken-4"><b>{{course.name}}</b><i
+                        class="material-icons right">more_vert</i></span>
+                <p><a href="{% url 'category' %}">{{course.category}}</a></p>
+                <span class="title"><b>{{course.total_enrollment}}</b> Enrolled</span>
+                <br><br>
+                <!--Button for instructors-->
+                {% if user.is_staff %}  
+                <a href="{% url 'edit-course' course.id %}" class="indigo darken-3 btn">Edit Course</a>
+                <a href="{% url 'delete-course' course.id %}" class="red btn">Delete</a>
+                {% else %}
+                <a href="{% url 'course' course.id %}" class="indigo darken-3 btn">Resume</a>
+                <a href="#" class="red btn">Unenroll</a>
+                <a></a>
+                {% endif %}
+
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{course.name}}<i
+                        class="material-icons right">close</i></span>
+                <p>{{course.description}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+<!-- Style with Bootstrap here-->
+<!-- Index Page banner-->
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h2 class="header deep-purple-text center">Knowledge Workshop</h2>
+    <h5 class="header col s12 light center">Earn your certificate, learn a new skill everydays</h5>
+  </div>
+  <div class="row center">
+    <a class="btn-large blue" href="{% url 'category' %}">Browse</a>
+  </div>
+</div>
+{% endblock %}
+
+<!-- Course List-->
+{% block content %}
+<div class="section">
+  <h4>Popular</h4>
+  <div class="divider">
+
+  </div>
+</div>
+<div class="row">
+  {% for course in courses %}
+  <div class="col s12 m4">
+    <div class="card medium">
+      <div class="card-image waves-effect waves-block waves-light">
+        <a href="{% url 'course' course.id %}"><img class="activator" src="{{ course.image.url }}"></a>
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{course.name}}<i
+            class="material-icons right">more_vert</i></span>
+        <p><a href="{% url 'category' %}">{{course.category}}</a></p>
+        <div class="section"><a href="{% url 'course' course.id %}" class="waves-effect waves-light indigo darken-3 btn right">Details</a></div><br>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">{{course.name}}<i class="material-icons right">close</i></span>
+        <p>{{course.description}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Philomath | Online Courses and Professional Skills from the Best Instructors</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+
+    <nav class="indigo lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="{% url 'index' %}" class="brand-logo"><i class="material-icons">cloud</i>Philomath</a>
+            {% if user.is_authenticated %}
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
+                            class="material-icons left">person</i>{{user.username}}</a></li>
+            </ul>
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
+                            class="material-icons show-on-small left">person</i>{{user.username}}</a></li>
+            </ul>
+            {% else %}
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}" class="waves-effect waves-light indigo darken-3 btn"><i
+                            class="material-icons left">person</i>Signup</a></li>
+            </ul>
+            <ul id="slide-out" class="sidenav">
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}"><i class="material-icons left">person</i>Signup</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    {% if user.is_authenticated %}
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    {% if nav_profile.banner %}
+                    <img src="{{ nav_profile.banner.url }}">
+                    {% else %}
+                    <img src="{% static 'img/nobanner.jpg' %}">
+                    {% endif %}
+                </div>
+                <a href="#user">
+                    {% if nav_profile.picture %}
+                    <img src="{{ nav_profile.picture.url }}" class="circle responsive-img">
+                    {% else %}
+                    <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img">
+                    {% endif %}
+                </a>
+                <a href="#name"><span class="white-text name">{{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</span></a>
+                <a href="#email"><span class="white-text email">{{ nav_profile.user.email }}</span></a>
+            </div>
+        </li>
+        <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>My profile</a>
+        </li>
+        <li><a href="{% url 'index' %}"><i class="material-icons">dashboard</i>Dashboard</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Learning</a></li>
+        <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Courses</a></li>
+        <li><a href="#"><i class="material-icons">inbox</i>Inbox{% if directs_count %}<span class="new badge red">{{
+                    directs_count }}</span>{% endif %}</a></li>
+        <li><a href=""><i class="material-icons">circle_notifications</i>Notifications</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        {% if user.is_staff %}
+        <li><a class="subheader">Teaching</a></li>
+        <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Your courses</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        {% endif %}
+        <li><a href="{% url 'logout' %}"><i class="material-icons">power_off</i>Log out</a></li>
+    </ul>
+    {% else %}
+    {% endif %}
+
+
+    {% block banner %}
+    {% endblock %}
+
+    <div class="container">
+        <div class="section">
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <footer class="page-footer indigo darken-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Philomath</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like
+                        it's our full time job. Any amount would help support and continue development on this project
+                        and is greatly appreciated.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{% static 'js/materialize.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+    {% block javascript %}
+    {% endblock %}
+
+</body>
+
+</html>

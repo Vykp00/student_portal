@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row center-align">
+    <div class="col s12">
+        <form method="post" enctype="multipart/form-data" action="" role="form">
+            {% csrf_token %}
+            <h3 class="title is-3">Create a New Page</h3>
+            <div class="input-field">
+                {{ form.title }}
+                <label for="name">Title</label>
+            </div>
+
+            <div class="input-field">
+                {{ form.content }}
+                <label for="description">Content</label>
+            </div>
+
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>Files</span>
+                    {{ form.files}}
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                  </div>
+                </div>
+                
+            <div class="field">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Create
+                    <i class="material-icons right">class</i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

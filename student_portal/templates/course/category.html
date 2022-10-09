@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+<!-- Style with Bootstrap here-->
+<!-- Index Page banner-->
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <h2 class="header deep-purple-text center">Knowledge Workshop</h2>
+        <h5 class="header col s12 light center">Earn your certificate, learn a new skill everydays</h5>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Course List-->
+{% block content %}
+<div class="section">
+    <h4>Categories</h4>
+    <div class="divider">
+
+    </div>
+</div>
+
+
+<div class="row">
+    {% for category in categories %}
+    <div class="col s12 m5">
+        <a href="{% url 'category-courses' category.slug %}">
+            <div class="card-panel indigo z-depth-4 center-align white-text">
+                <i class="large material-icons">{{category.icon}}</i>
+                <h5><b>{{category.title}}</b></h5>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
