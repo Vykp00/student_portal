@@ -36,30 +36,47 @@
             </div>
             <ul class="collapsible">
                 {% for module in course.modules.all %}
-                    <li>
-                        <div class="collapsible-header">
-                            <i class="material-icons">library_books</i><b>{{ module.title }}</b><span class="badge">{{module.hours}} hours</span>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">library_books</i><b>{{ module.title }}</b><span
+                            class="badge">{{module.hours}} hours</span>
+                    </div>
+                    <div class="collapsible-body">
+                        {% if instructor_mode == True %}
+                        <a class="waves-effect waves-light indigo darken-3 btn"
+                            href="{% url 'new-page' course.id module.id %}"><i
+                                class="material-icons left">add</i>Page</a>
+                        <a class="waves-effect waves-light indigo darken-3 btn" href="{% url 'new-exam' course.id module.id %}"><i
+                                class="material-icons left">add</i>New Exams</a>
+                        <a class="waves-effect waves-light indigo darken-3 btn"><i
+                                class="material-icons left">add</i>New Assignments </a>
+                        {% endif %}
+                        <div class="collection">
+                            <br>
+                            <!--Call pages (Many to Many field)-->
+                            {% for page in module.pages.all %}
+                            <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item"><i
+                                    class="material-icons left">view_module</i>{{ page.title }}
+                                <!--Complete mark-->
+                                <div class="secondary-content">
+                                    Completed:
+                                    <i class="material-icons left secondary-content">panorama_fish_eye</i>
+                                </div>
+                            </a>
+                            {% endfor %}
+                            {% for exam in module.exams.all %}
+                            <a href="{% url 'exam-detail' course.id module.id exam.id %}" class="collection-item"><i
+                                    class="material-icons left">assignment</i>{{ exam.title }}
+                                <!--Complete mark-->
+                                <div class="secondary-content">
+                                    Completed:
+                                    <i class="material-icons left secondary-content">panorama_fish_eye</i>
+                                </div>
+                            </a>
+                            {% endfor %}
                         </div>
-                        <div class="collapsible-body">
-                            {% if instructor_mode == True %}
-                            <a class="waves-effect waves-light indigo darken-3 btn"
-                                href="{% url 'new-page' course.id module.id %}"><i
-                                    class="material-icons left">add</i>Page</a>
-                            <a class="waves-effect waves-light indigo darken-3 btn"><i
-                                    class="material-icons left">add</i>New Quizzes</a>
-                            <a class="waves-effect waves-light indigo darken-3 btn"><i
-                                    class="material-icons left">add</i>New Assignments </a>
-                            {% endif %}
-                            <div class="collection">
-                                <br>
-                                <!--Call pages (Many to Many field)-->
-                                {% for module in module.pages.all %}
-                                <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item"><i
-                                        class="material-icons left">view_module</i>{{ page.title }}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </li>
+                    </div>
+                </li>
                 {% endfor %}
             </ul>
 

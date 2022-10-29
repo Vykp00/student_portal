@@ -9,12 +9,12 @@
             {% csrf_token %}
             <h3 class="title is-3">Create a New Module</h3>
 
-            <div class="input-field">
-                {{ form.title}}
-                <label for="name">Title</label>
+            <div class="input-field col s12">
+                {{ form.title }}
+                <label for="first_name">Title</label>
             </div>
 
-            <div class="input-field">
+            <div class="input-field col s12">
                 {{ form.hours }}
                 <label for="description">Hours</label>
             </div>

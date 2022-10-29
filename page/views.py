@@ -25,8 +25,8 @@ def NewPageModules(request, course_id, module_id):
         if request.method == 'POST':
             form = NewPageForm(request.POST, request.FILES)
             if form.is_valid():
-                title = form.cleaned_data('title')
-                content = form.cleaned_data('content')
+                title = form.cleaned_data.get('title')
+                content = form.cleaned_data.get('content')
                 files = request.FILES.getlist('files')
 
                 # Save file from the form to add into the new page
@@ -38,15 +38,15 @@ def NewPageModules(request, course_id, module_id):
                 p = Page.objects.create(title=title, content=content, user=user)
                 p.files.set(file_objs)
                 p.save()
-                # Add new page to module
+                # Add new page to moduleS
                 module.pages.add(p)
-                return redirect('my-courses')
-            else:
+                return redirect('modules', course_id=course_id)
+        else:
                 form = NewPageForm()
-        context = {
-            'form': form,
-        }
-        return render(request, 'page/newpage.html', context)
+    context = {
+        'form': form,
+    }
+    return render(request, 'page/newpage.html', context)
 
 # Page detail views
 def PageDetail(request, course_id, module_id, page_id):

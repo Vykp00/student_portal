@@ -1,8 +1,10 @@
 from email.policy import default
 from enum import unique
+from random import choices
+from secrets import choice
 from tabnanny import verbose
 import sys
-from telnetlib import DO
+from telnetlib import DO, STATUS
 from tkinter import CASCADE
 from turtle import mode
 from typing_extensions import Required
@@ -10,7 +12,9 @@ from unicodedata import category
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+
 from module.models import Module
+from assignment.models import Assignment, Submission
 
 try:
     from django.db import models
@@ -73,3 +77,21 @@ class Course(models.Model):
 
     def __str__(self):
         return "Title: " + self.name
+
+# Grade model for submission
+class Grade(models.Model):
+    # Create status_choice for assignment
+    NOT_GRADED = 'NG'
+    GRADED = 'G'
+    STATUS_CHOICES = [
+        (NOT_GRADED, 'Not graded'),
+        (GRADED, 'Graded'),
+    ]
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
+    points = models.PositiveIntegerField(default=0)
+    # Name of the teacher
+    graded_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.CharField(choices=STATUS_CHOICES, default=NOT_GRADED, max_length=10, verbose_name='Status')
+    

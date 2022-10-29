@@ -53,7 +53,7 @@ def Signup(request):
             password = form.cleaned_data.get('password')
             User.objects.create_user(
                 username=username, email=email, password=password)
-            return redirect('edit-profile')
+            return redirect('djangoapp:edit-profile')
     else:
         form = SignupForm()
 

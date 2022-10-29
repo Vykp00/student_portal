@@ -36,8 +36,7 @@ def user_directory_path_banner(instance, filename):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     location = models.CharField(max_length=50, null=True, blank=True)
     url = models.CharField(max_length=80, null=True, blank=True)
     profile_info = models.TextField(max_length=150, null=True, blank=True)
@@ -65,9 +64,13 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
 
 
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+
+def save_profile(sender, instance, created, **kwargs):
+    user = instance
+    if created:
+        profile = Profile.objects.get(user=user)
+        profile.save()
 
 
 post_save.connect(create_user_profile, sender=User)
-post_save.connect(save_user_profile, sender=User)
+post_save.connect(save_profile, sender=User)

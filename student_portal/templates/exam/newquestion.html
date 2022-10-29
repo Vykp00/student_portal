@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row center-align">
+  <div class="col s12">
+<!--update idea: Add a container show created questions for the exam-->
+    <form method="post" enctype="multipart/form-data" action="" role="form">
+      {% csrf_token %}
+      <h3 class="title is-3">Create a New Question</h3>
+
+      <div class="input-field">
+        {{ form.question_text }}
+        <label for="question_text">Question</label>
+      </div>
+      <div class="divider"></div>
+
+      <div class="input-field col s12">
+        {{ form.points }}
+        <label for="points">Point(s)</label>
+      </div>
+
+      <!--Answer List-->
+      <div class="input-field col s9">
+        <input type="text" name="answer_text" id="id_answer_text" class="validate">
+        <label for="answer_text">Answer 1</label>
+      </div>
+      <div class="input-field col s3">
+        <select id="id_is_correct" name="is_correct">
+          <option value="" disabled selected>Choose yes or no</option>
+          <option value="True">Yes</option>
+          <option value="False">No</option>
+        </select>
+        <label>Is this answer correct?</label>
+      </div>
+
+      <div class="input-field col s9">
+        <input type="text" name="answer_text" id="id_answer_text" class="validate">
+        <label for="answer_text">Answer 2</label>
+      </div>
+      <div class="input-field col s3">
+        <select id="id_is_correct" name="is_correct">
+          <option value="" disabled selected>Choose yes or no</option>
+          <option value="True">Yes</option>
+          <option value="False">No</option>
+        </select>
+        <label>Is this answer correct?</label>
+      </div>
+
+      <div class="input-field col s9">
+        <input type="text" name="answer_text" id="id_answer_text" class="validate">
+        <label for="answer_text">Answer 3</label>
+      </div>
+      <div class="input-field col s3">
+        <select id="id_is_correct" name="is_correct">
+          <option value="" disabled selected>Choose yes or no</option>
+          <option value="True">Yes</option>
+          <option value="False">No</option>
+        </select>
+        <label>Is this answer correct?</label>
+      </div>
+
+      <div class="input-field col s9">
+        <input type="text" name="answer_text" id="id_answer_text" class="validate">
+        <label for="answer_text">Answer 4</label>
+      </div>
+      <div class="input-field col s3">
+        <select id="id_is_correct" name="is_correct">
+          <option value="" disabled selected>Choose yes or no</option>
+          <option value="True">Yes</option>
+          <option value="False">No</option>
+        </select>
+        <label>Is this answer correct?</label>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
+        </div>
+      </div>
+      <div class="col s12">
+        <p class="controll">
+          <button class="btn waves-effect waves-light" type="submit" value="login">Create Question
+            <i class="material-icons right">class</i>
+          </button>
+        </p>
+      </div>
+      <div class="col s12">
+        <button href="{% url 'my-courses' %}" class="btn waves-effect waves-light">Finish
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

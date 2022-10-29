@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+bywg-bx8dj$2gj*i#1!dag47jg9^)=tca7j^q0d$51p#b3$+c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'module',
     'page',
+    'exam',
+    'assignment',
 ]
 
 MIDDLEWARE = [

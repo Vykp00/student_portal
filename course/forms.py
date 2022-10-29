@@ -2,7 +2,6 @@ from dataclasses import field
 from email.mime import image
 from importlib.metadata import requires
 from pyexpat import model
-from socket import fromshare
 from tkinter.tix import Form
 from tokenize import Triple
 from typing_extensions import Required

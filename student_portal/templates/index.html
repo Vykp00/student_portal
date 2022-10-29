@@ -4,14 +4,57 @@
 {% block banner %}
 <!-- Style with Bootstrap here-->
 <!-- Index Page banner-->
-<div class="section no-pad-bot" id="index-banner">
+<div class="slider"id="index-banner" >
+  <ul class="slides z-depth-3">
+    <li>
+      <img src="{% static 'img/study.jpg' %}"> <!-- random image -->
+      <div class="caption center-align">
+        <h2 class="white-text">Learn new skills everydays</h2>
+        <h4 class="light grey-text text-lighten-3">Start, switch, or advance your career with more than 5,200 courses.</h4>
+        <br>
+        <a class="waves-effect waves-light btn-large indigo" href="{% url 'signup' %}">Join for free</a>
+      </div>
+    </li>
+    <li>
+      <img src="{% static 'img/suit.jpg' %}"> <!-- random image -->
+      <div class="caption left-align">
+        <h3>Get job-ready for an in-demand career</h3>
+        <h5 class="light grey-text text-lighten-3">No prior experience necessary to get started.</h5>
+        <br><br>
+        <a class="waves-effect waves-light btn-large indigo" href="{% url 'category' %}">Browse</a>
+      </div>
+    </li>
+    <li>
+      <img src="{% static 'img/book.jpg' %}"> <!-- random image -->
+      <div class="caption right-align">
+        <h3>Over 15 categories to choose</h3>
+        <h5 class="light grey-text text-lighten-3">Learn without limit</h5>
+        <br><br>
+        <a class="waves-effect waves-light btn-large indigo" href="{% url 'category' %}">Top categories</a>
+      </div>
+    </li>
+    <li>
+      <img src="{% static 'img/teacher_men.jpg' %}"> <!-- random image -->
+      <div class="caption left-align">
+        <h3 class="black-text">Come teach with us</h3>
+        <h5 class="light blue-grey-text text-darken-4">Become an instructor and change lives — including your own</h5>
+        <br><br>
+        <a class="waves-effect waves-light btn-large indigo" a href="{% url 'signup' %}">Get started</a>
+      </div>
+    </li>
+  </ul>
+</div> 
+
+<div class="section" id="index-banner">
   <div class="container">
     <br><br>
-    <h2 class="header deep-purple-text center">Knowledge Workshop</h2>
-    <h5 class="header col s12 light center">Earn your certificate, learn a new skill everydays</h5>
+    <h2 class="header deep-purple-text center"><b>Knowledge Workshop</b></h2>
+    <h4 class="header col s12 light center">Earn your certificate, learn a new skill everydays</h4>
+    <br>
+    <br>
   </div>
   <div class="row center">
-    <a class="btn-large blue" href="{% url 'category' %}">Browse</a>
+    <a class="waves-effect waves-light btn-large indigo" href="{% url 'category' %}">Browse</a>
   </div>
 </div>
 {% endblock %}
@@ -45,5 +88,17 @@
   </div>
   {% endfor %}
 </div>
-
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/materialize.min.js' %}"></script>
+<script>
+  var instance = M.Carousel.init({
+    fullWidth: true,
+    indicators: true
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.slider');
+    var instances = M.Slider.init(elems, options);
+  });
+</script>
 {% endblock %}

@@ -36,19 +36,22 @@
             <div class="card-content">
                 <span class="card-title activator blue-text text-darken-4"><b>{{course.name}}</b><i
                         class="material-icons right">more_vert</i></span>
-                <p><a href="{% url 'category' %}">{{course.category}}</a></p>
-                <span class="title"><b>{{course.total_enrollment}}</b> Enrolled</span>
-                <br><br>
-                <!--Button for instructors-->
-                {% if user.is_staff %}  
-                <a href="{% url 'edit-course' course.id %}" class="indigo darken-3 btn">Edit Course</a>
-                <a href="{% url 'delete-course' course.id %}" class="red btn">Delete</a>
-                {% else %}
-                <a href="{% url 'course' course.id %}" class="indigo darken-3 btn">Resume</a>
-                <a href="#" class="red btn">Unenroll</a>
-                <a></a>
-                {% endif %}
-
+                <div class="row">
+                    <div class="col s4">
+                    <p><a href="{% url 'category' %}">{{course.category}}</a></p>
+                    <span class="title"><b>{{course.total_enrollment}}</b> Enrolled</span>
+                    </div>
+                    <div class="col s3 offset-s4 right-align">
+                    <!--Button for instructors-->
+                    {% if user.is_staff %}
+                    <!--<a href="{% url 'edit-course' course.id %}" class="indigo darken-3 btn">Edit Course</a>-->
+                    <a href="{% url 'delete-course' course.id %}" class="red btn">Delete</a>
+                    {% else %}
+                    <a href="{% url 'course' course.id %}" class="indigo darken-3 btn">Resume</a>
+                    <a href="#" class="red btn">Unenroll</a>
+                    {% endif %}
+                </div>
+                </div>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">{{course.name}}<i

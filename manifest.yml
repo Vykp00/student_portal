@@ -1,0 +1,11 @@
+applications:
+  - name: student_portal
+    routes:
+      - route: vykp.eu-de.mybluemix.net
+    memory: 256M
+    buildpack: python_buildpack
+  - name: student_portal-nginx
+    routes:
+      - route: vykp.eu-de.mybluemix.net/static
+    memory: 256M
+    buildpack: staticfile_buildpack
