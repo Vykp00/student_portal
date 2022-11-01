@@ -9,7 +9,7 @@ from uuid import UUID
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
-from course.models import Course, Category
+from course.models import Course, Category, Grade
 from course.forms import NewCourseForm
 
 # Create your views here.
@@ -139,6 +139,7 @@ def EditCourse(request, course_id):
     }
     return render(request, 'course/edit-course.html', context)
 
+# My course view
 def MyCourses(request):
     user = request.user
     if user.is_staff:
@@ -150,3 +151,52 @@ def MyCourses(request):
     }
 
     return render(request, 'course/my-courses.html', context)
+
+# Get my submission view from submission app
+def Submissions(request, course_id):
+    user = request.user
+    course = get_object_or_404(Course, id=course_id)
+    grades = Grade.objects.filter(course=course, submission__user=user)
+    context = {
+        'grades': grades,
+        'course': course,
+    }
+    return render(request, 'course/submissions.html', context)
+
+# Get student's submission view
+def StudentSubmissions(request, course_id):
+    user = request.user
+    course = get_object_or_404(Course, id=course_id)
+    if user !=course.user:
+        return HttpResponseForbidden()
+    else:
+        grades = Grade.objects.filter(course=course)
+        context = {
+        'course': course,
+        'grades': grades,
+        }
+        return render(request, 'course/student-grades.html', context)
+
+# Post grade for submitted assignment view
+def GradeSubmission(request, course_id, grade_id):
+    user = request.user
+    course = get_object_or_404(Course, id=course_id)
+    grade = get_object_or_404(Grade, id=grade_id)
+
+    if user !=course.user:
+        return HttpResponseForbidden()
+    else:
+        if request.method == 'POST':
+            points = request.POST.get('points')
+            grade.points = points
+            grade.status = 'graded'
+            grade.graded_by = user
+            grade.save()
+            
+            return redirect('student-submissions', course_id=course_id)
+
+    context = {
+        'course': course,
+        'grade': grade,
+    }
+    return render(request, 'course/grade-submission.html', context)

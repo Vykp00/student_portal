@@ -13,7 +13,7 @@ class Module(models.Model):
     hours = models.PositiveIntegerField()
     pages = models.ManyToManyField(Page)
     exams = models.ManyToManyField(Exams)
-    assignment = models.ManyToManyField(Assignment)
+    assignments = models.ManyToManyField(Assignment)
 
     def __str__(self):
         return self.title

@@ -7,7 +7,7 @@ from assignment.models import Assignment, Submission
 class NewAssignmentForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate'}), required=True)
     content = forms.CharField(widget=CKEditorWidget())
-    points = forms.ImageField(max_value=100, min_value=1)
+    points = forms.IntegerField(max_value=100, min_value=1)
     due= forms.DateField(widget=forms.TextInput(attrs={'class': 'datepicker'}), required=True)
     # Allow multiple file submission
     files= forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple':True}), required=False)
@@ -21,5 +21,5 @@ class NewSubmissionForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate'}), required=True)
 
     class Meta:
-        model: Submission
+        model = Submission
         fields = ('file', 'comment')

@@ -81,8 +81,8 @@ class Course(models.Model):
 # Grade model for submission
 class Grade(models.Model):
     # Create status_choice for assignment
-    NOT_GRADED = 'NG'
-    GRADED = 'G'
+    NOT_GRADED = 'Not graded'
+    GRADED = 'Graded'
     STATUS_CHOICES = [
         (NOT_GRADED, 'Not graded'),
         (GRADED, 'Graded'),
