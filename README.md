@@ -1,6 +1,6 @@
 # Online Course Portal
 ##### This is a dynamic websites for users to present their amazing courses. This project contains at least 6 modules for individual apps in the website. You can modify each module based on your needs. If you like this project then ADD a STAR ⭐️ to this project 👆
-  ![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/GIF/intro.gif.gif)
+  ![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/gif/intro.gif.gif)
 ## Table of contents
 * [Technologies](#technologies)
 * [Features](#features)
@@ -17,19 +17,19 @@
 ### Overviews
 ##### User can browse through popular courses and details in your profile
 
-  ![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/GIF/intro.gif.gif)
+  ![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/gif/intro.gif.gif)
 
 ### Enroll based on topics or popularity
 ##### Browse various on-demand courses based on topics or poplularity
-![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/GIF/course-gif.gif)
+![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/gif/course-gif.gif)
 
 ### On-demand study materials
 ##### Student can study at their own pace and take exam within deadlines
-![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/GIF/course-detail-gif.gif)
+![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/gif/course-detail-gif.gif)
 
 ### Sign up
 ##### Teacher or student can views all available courses. However, registration is required to access all materials or create, edit, or delete courses 
-![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/GIF/sign-up-gif.gif)
+![](https://github.com/Vykp00/student_portal/blob/main/student_portal/static/gif/sign-up-gif.gif)
 
 ### User Management
 #### A. Admin Users Can
