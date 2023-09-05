@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'page',
     'exam',
     'assignment',
+    'discussion',
 ]
 
 MIDDLEWARE = [
